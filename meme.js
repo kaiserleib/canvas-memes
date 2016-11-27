@@ -46,23 +46,33 @@ initializeDownload = function() {
         downloadLink.href = data;
     });
 }
+
 drawText = function() {
     clearCanvas();
-    ctx.lineWidth = 2;
-    ctx.font = "30pt sans-serif";
+    ctx.lineWidth = 5;
+    ctx.font = "bold 30pt impact";
     ctx.strokeStyle = "black";
     ctx.fillStyle = "white";
     ctx.textAlign = "center";
+    ctx.lineJoin = "bevel";
     var text = topText.value;
     text = text.toUpperCase();
-    ctx.beginPath();
-    ctx.strokeText(text, canvas.width / 2, canvas.height / 10);
-    ctx.fillText(text, canvas.width / 2, canvas.height / 10);
+    var topLines = getLines(text);
+    for (i = 0; i < topLines.length; i++) {
+        ctx.beginPath();
+        ycoord =  (canvas.height / 10) + 40 * i;
+        ctx.strokeText(topLines[i], canvas.width / 2, ycoord);
+        ctx.fillText(topLines[i], canvas.width / 2, ycoord);
+    };
     text = bottomText.value;
     text = text.toUpperCase();
-    ctx.beginPath();
-    ctx.strokeText(text, canvas.width / 2, canvas.height - canvas.height / 10);
-    ctx.fillText(text, canvas.width / 2, canvas.height - canvas.height / 10);
+    var bottomLines = getLines(text);
+    for (i = 0; i < bottomLines.length; i++) {
+        ctx.beginPath();
+        ycoord =  canvas.height - ((bottomLines.length - i) * 40);
+        ctx.strokeText(bottomLines[i], canvas.width / 2, ycoord);
+        ctx.fillText(bottomLines[i], canvas.width / 2, ycoord);
+    }
 }
 
 clearCanvas = function () {
@@ -77,6 +87,23 @@ clearCanvas = function () {
         ctx.fillStyle = "#ffffcc";
         ctx.fill();
     }
+}
+
+getLines = function(text) {
+    var words = text.split(" ");
+    var lines = [];
+    var currentLine = [];
+    words.forEach(function(word) {
+        var width = ctx.measureText(currentLine + " " + word).width;
+        if (width < canvas.width * 0.9) {
+            currentLine += " " + word;
+        } else {
+            lines.push(currentLine);
+            currentLine = word;
+        }
+    });
+    lines.push(currentLine);
+    return lines;
 }
 
 window.onload = function() {
