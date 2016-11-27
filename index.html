@@ -2,12 +2,27 @@
     <head>
         <title>Canvas Meme Generator</title>
         <script src = "meme.js"></script>
+        <link rel = "stylesheet" type = "text/css" href = "style.css"/>
     </head>
     <body bgcolor = "#ddddff">
         <canvas id = "memeCanvas"></canvas><br/>
-        <input id = "fileUpload" type = "file"/><br/>
-        <label for = "topText">Top Text:</label><input id = "topText" type = "text"/><br/>
-        <label for = "bottomText">Bottom Text:</label><input id = "bottomText" type = "text"><br/>
-        <a id = "downloadLink" href="#">View Image</a>
+        <form>
+            <div class = "row">
+                <label for = "fileUpload">Select an image file:</label>
+                <input id = "fileUpload" type = "file"/>
+            </div>
+            <div class = "row">
+                <label for = "topText">Top Text:</label>
+                <input id = "topText" type = "text"/>
+            </div>
+            <div class = "row">
+                <label for = "bottomText">Bottom Text:</label>
+                <input id = "bottomText" type = "text">
+            </div>
+            <div class = "row">
+                <span class = "spacer">&nbsp;</span>
+                <a id = "downloadLink" href="#">View Image</a>
+            </div>
+        </form>
     </body>
 </html>

@@ -1,0 +1,7 @@
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+form { display: table; }
+.row { display: table-row; }
+label { display: table-cell; text-align: right; padding-right: 0.3em; }
+input { display: table-cell; text-align: left; }
+a { display: table-cell; }
+.spacer { display: table-cell; }
