@@ -19,7 +19,7 @@ initializeUploader = function() {
         reader.onload = function(e) {
             img = new Image();
             img.onload = function() {
-                var ratio = Math.min(canvas.width / img.width, canvas.height / img.height);
+                var ratio = Math.min(800 / img.width, 500 / img.height);
 
                 canvas.width = img.width * ratio;
                 canvas.height = img.height * ratio;
