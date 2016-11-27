@@ -19,11 +19,15 @@ initializeUploader = function() {
         reader.onload = function(e) {
             img = new Image();
             img.onload = function() {
-                ctx.drawImage(img, 0, 0);
+                var ratio = Math.min(canvas.width / img.width, canvas.height / img.height);
+
+                canvas.width = img.width * ratio;
+                canvas.height = img.height * ratio;
+                ctx.drawImage(img, 
+                              0, 0, img.width,    img.height ,     
+                              0, 0, canvas.width, canvas.height);
             }
             img.src = reader.result;
-            canvas.width = img.width;
-            canvas.height = img.height;
         }
         reader.readAsDataURL(fileUpload.files[0]);
     });
@@ -80,7 +84,9 @@ clearCanvas = function () {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     if (img) {
-        ctx.drawImage(img, 0, 0);
+       ctx.drawImage(img, 
+                     0, 0, img.width,    img.height ,     
+                     0, 0, canvas.width, canvas.height);
     } else {
         ctx.beginPath();
         ctx.rect(0, 0, canvas.width, canvas.height);
