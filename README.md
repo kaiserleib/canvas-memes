@@ -3,5 +3,4 @@
 
 
 # why?
-Yesterday I wrote a [very basic meme generator in spring boot](https://github.com/kaiserleib/spring-memes). My buddy [Chase](http://chasemaier.com) pointed out that it's 
-much easier to accomplish the same thing using a canvas, so I did. 
+All the meme generators in the world have ads, they all put watermarks on your content, and I didn't write them. I wrote this one.
