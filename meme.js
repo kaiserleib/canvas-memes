@@ -1,4 +1,4 @@
-var canvas, ctx, fileUpload, img, topText, bottomText, topSize, bottomSize, downloadLink;
+var canvas, ctx, fileUpload, img, topText, bottomText, topSize, bottomSize, fontFace, downloadLink;
 
 initializeCanvas = function() {
     canvas = document.getElementById("memeCanvas");
@@ -45,6 +45,12 @@ initializeText = function() {
 
     bottomSize = document.getElementById("bottomSize");
     bottomSize.addEventListener("input", drawText);
+
+    fontFace = document.getElementById("fontFace");
+    fontFace.addEventListener("change", drawText);
+
+    fontStyle = document.getElementById("fontStyle");
+    fontStyle.addEventListener("change", drawText);
 }
 
 initializeDownload = function() {
@@ -57,21 +63,17 @@ initializeDownload = function() {
 
 drawText = function() {
     clearCanvas();
-    ctx.lineWidth = 5;
 
-    var size = topSize.value ? topSize.value : "30";
-    ctx.font = "bold " + size + "pt impact";
-    ctx.strokeStyle = "black";
-    ctx.fillStyle = "white";
-    ctx.textAlign = "center";
-    ctx.lineJoin = "bevel";
+    setStyle(topSize);
     var text = topText.value;
     text = text.toUpperCase();
     var topLines = getLines(text);
     for (i = 0; i < topLines.length; i++) {
         ctx.beginPath();
-        ycoord =  (canvas.height / 10) + (size * 1.2 * i) + 10;
-        ctx.strokeText(topLines[i], canvas.width / 2, ycoord);
+        ycoord =  (canvas.height / 10) + (topSize.value * 1.2 * i) + 10;
+        if (fontStyle.value == "outline") {
+            ctx.strokeText(topLines[i], canvas.width / 2, ycoord);
+        }
         ctx.fillText(topLines[i], canvas.width / 2, ycoord);
     };
 
@@ -82,10 +84,32 @@ drawText = function() {
     var bottomLines = getLines(text);
     for (i = 0; i < bottomLines.length; i++) {
         ctx.beginPath();
-        ycoord =  canvas.height - ((bottomLines.length - i) * (size * 1.2));
-        ctx.strokeText(bottomLines[i], canvas.width / 2, ycoord);
+        ycoord =  canvas.height - ((bottomLines.length - i) * (bottomSize.value * 1.2)) - 10;
+        if (fontStyle.value == "outline") {
+            ctx.strokeText(bottomLines[i], canvas.width / 2, ycoord);
+        }
         ctx.fillText(bottomLines[i], canvas.width / 2, ycoord);
     }
+}
+
+setStyle = function(pole) {
+    var size = pole.value ? pole.value : "30";
+    ctx.font = "bold " + size + "pt " + fontFace.value;
+
+    if (fontStyle.value == "outline") {
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = "black";
+        ctx.fillStyle = "white";
+        ctx.lineJoin = "bevel";
+    } else if (fontStyle.value == "black") {
+        ctx.lineWidth = 1;
+        ctx.fillStyle = "black";
+    } else if (fontStyle.value == "white") {
+        ctx.lineWidth = 1;
+        ctx.fillStyle = "white";
+    }
+
+    ctx.textAlign = "center";
 }
 
 clearCanvas = function () {
