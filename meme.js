@@ -51,6 +51,12 @@ initializeText = function() {
 
     fontStyle = document.getElementById("fontStyle");
     fontStyle.addEventListener("change", drawText);
+
+    topOffset = document.getElementById("topOffset");
+    topOffset.addEventListener("input", drawText);
+
+    bottomOffset = document.getElementById("bottomOffset");
+    bottomOffset.addEventListener("input", drawText);
 }
 
 initializeDownload = function() {
@@ -68,9 +74,10 @@ drawText = function() {
     var text = topText.value;
     text = text.toUpperCase();
     var topLines = getLines(text);
+    var topY = topOffset.value ? +(topOffset.value) : 10;
     for (i = 0; i < topLines.length; i++) {
         ctx.beginPath();
-        ycoord =  (canvas.height / 10) + (topSize.value * 1.2 * i) + 10;
+        ycoord =  (canvas.height / 10) + (topSize.value * 1.2 * i) + topY;
         if (fontStyle.value == "outline") {
             ctx.strokeText(topLines[i], canvas.width / 2, ycoord);
         }
@@ -78,13 +85,14 @@ drawText = function() {
     };
 
     size = bottomSize.value ? bottomSize.value : "30";
-    ctx.font = "bold " + bottomSize.value + "pt impact";
+    setStyle(bottomSize);
     text = bottomText.value;
     text = text.toUpperCase();
     var bottomLines = getLines(text);
+    var bottomY = bottomOffset.value ? +(bottomOffset.value) : 10;
     for (i = 0; i < bottomLines.length; i++) {
         ctx.beginPath();
-        ycoord =  canvas.height - ((bottomLines.length - i) * (bottomSize.value * 1.2)) - 10;
+        ycoord =  canvas.height - ((bottomLines.length - i) * (bottomSize.value * 1.2)) - bottomY;
         if (fontStyle.value == "outline") {
             ctx.strokeText(bottomLines[i], canvas.width / 2, ycoord);
         }
