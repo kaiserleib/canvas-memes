@@ -1,4 +1,4 @@
-var canvas, ctx, fileUpload, img, topText, bottomText, downloadLink;
+var canvas, ctx, fileUpload, img, topText, bottomText, topSize, bottomSize, downloadLink;
 
 initializeCanvas = function() {
     canvas = document.getElementById("memeCanvas");
@@ -33,14 +33,18 @@ initializeUploader = function() {
     });
 }
 
-initializeTopText = function() {
+initializeText = function() {
     topText = document.getElementById("topText");
     topText.addEventListener("input", drawText); 
-}
 
-initializeBottomText = function() {
     bottomText = document.getElementById("bottomText");
     bottomText.addEventListener("input", drawText);
+
+    topSize = document.getElementById("topSize");
+    topSize.addEventListener("input", drawText);
+
+    bottomSize = document.getElementById("bottomSize");
+    bottomSize.addEventListener("input", drawText);
 }
 
 initializeDownload = function() {
@@ -54,7 +58,9 @@ initializeDownload = function() {
 drawText = function() {
     clearCanvas();
     ctx.lineWidth = 5;
-    ctx.font = "bold 30pt impact";
+
+    var size = topSize.value ? topSize.value : "30";
+    ctx.font = "bold " + size + "pt impact";
     ctx.strokeStyle = "black";
     ctx.fillStyle = "white";
     ctx.textAlign = "center";
@@ -64,16 +70,19 @@ drawText = function() {
     var topLines = getLines(text);
     for (i = 0; i < topLines.length; i++) {
         ctx.beginPath();
-        ycoord =  (canvas.height / 10) + 40 * i;
+        ycoord =  (canvas.height / 10) + (size * 1.2 * i) + 10;
         ctx.strokeText(topLines[i], canvas.width / 2, ycoord);
         ctx.fillText(topLines[i], canvas.width / 2, ycoord);
     };
+
+    size = bottomSize.value ? bottomSize.value : "30";
+    ctx.font = "bold " + bottomSize.value + "pt impact";
     text = bottomText.value;
     text = text.toUpperCase();
     var bottomLines = getLines(text);
     for (i = 0; i < bottomLines.length; i++) {
         ctx.beginPath();
-        ycoord =  canvas.height - ((bottomLines.length - i) * 40);
+        ycoord =  canvas.height - ((bottomLines.length - i) * (size * 1.2));
         ctx.strokeText(bottomLines[i], canvas.width / 2, ycoord);
         ctx.fillText(bottomLines[i], canvas.width / 2, ycoord);
     }
@@ -115,7 +124,6 @@ getLines = function(text) {
 window.onload = function() {
     initializeCanvas();
     initializeUploader();
-    initializeTopText();
-    initializeBottomText();
+    initializeText();
     initializeDownload();
 }
