@@ -70,6 +70,7 @@ initializeDownload = function() {
 drawText = function() {
     clearCanvas();
 
+    size = topSize.value ? topSize.value : "30";
     setStyle(topSize);
     var text = topText.value;
     text = text.toUpperCase();
@@ -77,7 +78,7 @@ drawText = function() {
     var topY = topOffset.value ? +(topOffset.value) : 10;
     for (i = 0; i < topLines.length; i++) {
         ctx.beginPath();
-        ycoord =  (canvas.height / 10) + (topSize.value * 1.2 * i) + topY;
+        ycoord =  (canvas.height / 10) + (size * 1.2 * i) + topY;
         if (fontStyle.value == "outline") {
             ctx.strokeText(topLines[i], canvas.width / 2, ycoord);
         }
@@ -92,7 +93,7 @@ drawText = function() {
     var bottomY = bottomOffset.value ? +(bottomOffset.value) : 10;
     for (i = 0; i < bottomLines.length; i++) {
         ctx.beginPath();
-        ycoord =  canvas.height - ((bottomLines.length - i) * (bottomSize.value * 1.2)) - bottomY;
+        ycoord =  canvas.height - ((bottomLines.length - i) * (size * 1.2)) - bottomY;
         if (fontStyle.value == "outline") {
             ctx.strokeText(bottomLines[i], canvas.width / 2, ycoord);
         }
