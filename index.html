@@ -4,47 +4,75 @@
         <script src = "meme.js"></script>
         <link rel = "stylesheet" type = "text/css" href = "style.css"/>
     </head>
-    <body bgcolor = "#ddddff">
-        <canvas id = "memeCanvas"></canvas><br/>
-        <form>
-            <div class = "row">
-                <label for = "fileUpload">Select an image file:</label>
-                <input id = "fileUpload" type = "file"/>
-                <label for = "fontFace">Font:</label>
-                <select id = "fontFace">
-                    <option value = "impact" selected = "selected">Impact</option>
-                    <option value = "Comic Sans MS">Comic Sans</option>
-                    <option value = "helvetica neue">Helvetica Neue</option>
-                    <option value = "papyrus">Papyrus</option>
-                    <option value = "garamond">Garamond</option>
-                </select>
+    <body>
+        <div id = "header">
+            <h1>HTML5 Canvas Meme Generator</h1>
+        </div>
+        <div id = "left-column">
+            <canvas id = "memeCanvas"></canvas>
+        </div>
+        <div id = "right-column">
+            <form>
+                <div>
+                    <label for = "fileUpload">Select an image file:</label>
+                    <input id = "fileUpload" type = "file"/>
+                    <br/>
+                </div>
+                <div>
+                    <label for = "fontFace">Font:</label>
+                    <select id = "fontFace">
+                        <option value = "impact" selected = "selected">Impact</option>
+                        <option value = "Comic Sans MS">Comic Sans</option>
+                        <option value = "helvetica neue">Helvetica Neue</option>
+                        <option value = "papyrus">Papyrus</option>
+                        <option value = "garamond">Garamond</option>
+                    </select>
+                    <br/>
+                </div>
+                <div>
                 <label for = "fontStyle">Style:</label>
-                <select id = "fontStyle">
-                    <option value = "outline" selected = "selected">Black Outline White</option>
-                    <option value = "black">Black</option>
-                    <option value = "white">White</option>
-                </select>
-            </div>
-            <div class = "row">
-                <label for = "topText">Top Text:</label>
-                <input id = "topText" type = "text"/>
-                <label for = "topSize">Size:</label>
-                <input id = "topSize" type = "range" min = "1" max = "100"/>
-                <label for = "topOffset">Offset:</label>
-                <input id = "topOffset" type = "range" min = "-100" max = "500"/>
-            </div>
-            <div class = "row">
-                <label for = "bottomText">Bottom Text:</label>
-                <input id = "bottomText" type = "text">
-                <label for = "bottomSize">Size:</label>
-                <input id = "bottomSize" type = "range" min = "1" max = "100"/>
-                <label for = "bottomOffset">Offset:</label>
-                <input id = "bottomOffset" type = "range" min = "-100" max = "500"/>
-            </div>
-            <div class = "row">
-                <span class = "spacer">&nbsp;</span>
-                <a id = "downloadLink" href="#">View Image In New Tab</a>
-            </div>
-        </form>
+                    <select id = "fontStyle">
+                        <option value = "outline" selected = "selected">Black Outline White</option>
+                        <option value = "black">Black</option>
+                        <option value = "white">White</option>
+                    </select>
+                    <br/>
+                </div>
+                <div>
+                    <label for = "topText">Top Text:</label>
+                    <input id = "topText" type = "text"/>
+                    <br/>
+                </div>
+                <div>
+                    <label for = "topSize">Size:</label>
+                    <input id = "topSize" type = "range" min = "1" max = "100"/>
+                    <br/>
+                </div>
+                <div>
+                    <label for = "topOffset">Offset:</label>
+                    <input id = "topOffset" type = "range" min = "-100" max = "500"/>
+                    <br/>
+                </div>
+                <div>
+                    <label for = "bottomText">Bottom Text:</label>
+                    <input id = "bottomText" type = "text">
+                    <br/>
+                </div>
+                <div>
+                    <label for = "bottomSize">Size:</label>
+                    <input id = "bottomSize" type = "range" min = "1" max = "100"/>
+                    <br/>
+                </div>  
+                <div>
+                    <label for = "bottomOffset">Offset:</label>
+                    <input id = "bottomOffset" type = "range" min = "-100" max = "500"/>
+                    <br/>
+                </div>
+                <div>
+                    <a id = "downloadLink" href="#">View Image (New Tab)</a>
+                    <span class="spacer"/>
+                </div>
+            </form>
+        </div>
     </body>
 </html>

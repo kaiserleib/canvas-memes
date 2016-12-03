@@ -2,14 +2,15 @@ var canvas, ctx, fileUpload, img, topText, bottomText, topSize, bottomSize, font
 
 initializeCanvas = function() {
     canvas = document.getElementById("memeCanvas");
-    canvas.width = Math.min(800, window.innerWidth * 0.8);
+    leftColumn = document.getElementById("left-column");
+    canvas.width = Math.min(800, leftColumn.offsetWidth);
     canvas.height = Math.min(500, window.innerHeight * 0.8);
 
     ctx = canvas.getContext('2d');
     ctx.beginPath();
     ctx.rect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#ffffcc";
-    ctx.fill();
+    ctx.strokeStyle = "#333333";
+    ctx.stroke();
 }
 
 initializeUploader = function() {
@@ -19,7 +20,7 @@ initializeUploader = function() {
         reader.onload = function(e) {
             img = new Image();
             img.onload = function() {
-                var ratio = Math.min(800 / img.width, 500 / img.height);
+                var ratio = Math.min(canvas.width / img.width, canvas.height / img.height);
 
                 canvas.width = img.width * ratio;
                 canvas.height = img.height * ratio;
@@ -165,4 +166,8 @@ window.onload = function() {
     initializeUploader();
     initializeText();
     initializeDownload();
+}
+
+window.onresize = function() {
+    initializeCanvas();
 }

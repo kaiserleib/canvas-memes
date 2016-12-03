@@ -1,8 +1,24 @@
 body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-form { display: table; }
-.row { display: table-row; }
-label { display: table-cell; text-align: right; padding-right: 0.3em; padding-left:0.3em;}
-input { display: table-cell; text-align: left; width: 80%;}
-select { display: table-cell; text-align: left; width: 80%;}
-a { display: table-cell; }
-.spacer { display: table-cell; }
+label { display: block; float: left; text-align:right; margin-right:0.3em; width: 10em;}
+a { display: block; float: left; text-align:right; margin-right:0.3em; width: 16em;}
+select { width: 14em;}
+input { width: 14em;}
+#left-column {
+	float:left;
+	width:46%;
+	position:relative;
+	overflow:hidden;
+}
+#right-column {
+	float:left;
+	width:46%;
+	position:relative;
+	overflow:hidden;
+    padding-left: 1em;
+}
+#header {
+    clear: both;
+    width: 100%;
+    display: block;
+    text-align: center;
+}
