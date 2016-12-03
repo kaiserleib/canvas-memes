@@ -69,6 +69,7 @@ initializeDownload = function() {
     downloadLink.addEventListener("click", function() {
         var data = canvas.toDataURL();
         downloadLink.href = data;
+        downloadLink.target = "_blank";
     });
 }
 
