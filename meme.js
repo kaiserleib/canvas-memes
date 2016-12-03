@@ -42,9 +42,11 @@ initializeText = function() {
 
     topSize = document.getElementById("topSize");
     topSize.addEventListener("input", drawText);
+    topSize.value = 30;
 
     bottomSize = document.getElementById("bottomSize");
     bottomSize.addEventListener("input", drawText);
+    bottomSize.value = 30;
 
     fontFace = document.getElementById("fontFace");
     fontFace.addEventListener("change", drawText);
@@ -54,9 +56,11 @@ initializeText = function() {
 
     topOffset = document.getElementById("topOffset");
     topOffset.addEventListener("input", drawText);
+    topOffset.value = -10;
 
     bottomOffset = document.getElementById("bottomOffset");
     bottomOffset.addEventListener("input", drawText);
+    bottomOffset.value = -30;
 }
 
 initializeDownload = function() {
