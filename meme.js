@@ -139,8 +139,8 @@ clearCanvas = function () {
     } else {
         ctx.beginPath();
         ctx.rect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "#ffffcc";
-        ctx.fill();
+        ctx.strokeStyle = "#333333";
+        ctx.stroke();
     }
 }
 
