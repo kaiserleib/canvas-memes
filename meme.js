@@ -1,4 +1,4 @@
-var canvas, ctx, fileUpload, img, topText, bottomText, topSize, bottomSize, fontFace, downloadLink;
+var canvas, ctx, chooser, fileUpload, img, topText, bottomText, topSize, bottomSize, fontFace, downloadLink;
 
 initializeCanvas = function() {
     canvas = document.getElementById("memeCanvas");
@@ -13,16 +13,22 @@ initializeCanvas = function() {
     ctx.stroke();
 }
 
+initializeImage = function() {
+    img = new Image();
+    img.onload = function() {
+        var ratio = Math.min(canvas.width / img.width, canvas.height / img.height);
+        canvas.width = img.width * ratio;
+        canvas.height = img.height * ratio;
+        drawImage();
+        drawText();
+    }
+}
+
 initializeUploader = function() {
     fileUpload = document.getElementById("fileUpload");
     fileUpload.addEventListener("change", function() {
         var reader = new FileReader();
         reader.onload = function(e) {
-            img = new Image();
-            img.onload = function() {
-                drawImage();
-                drawText();
-            }
             img.src = reader.result;
         }
         reader.readAsDataURL(fileUpload.files[0]);
@@ -67,17 +73,28 @@ initializeDownload = function() {
         downloadLink.target = "_blank";
     });
 }
+
+initializeChooser = function() {
+    chooser = document.getElementById("fileChoose");
+    chooser.addEventListener("change", function() {
+        var imagePath = chooser.value;
+        if (imagePath !== "none") {
+            img.src = "images/" + imagePath;
+        }
+        if (img.complete) {
+            drawText();
+        }
+    });
+}
+
 drawImage = function() {
     if (img) {
-        var ratio = Math.min(canvas.width / img.width, canvas.height / img.height);
-
-        canvas.width = img.width * ratio;
-        canvas.height = img.height * ratio;
         ctx.drawImage(img, 
                     0, 0, img.width,    img.height ,     
                     0, 0, canvas.width, canvas.height);
     }
 }
+
 drawText = function() {
     clearCanvas();
     drawImage();
@@ -166,7 +183,9 @@ getLines = function(text) {
 }
 
 window.onload = function() {
+    initializeImage();
     initializeCanvas();
+    initializeChooser();
     initializeUploader();
     initializeText();
     initializeDownload();
