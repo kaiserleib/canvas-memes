@@ -20,13 +20,7 @@ initializeUploader = function() {
         reader.onload = function(e) {
             img = new Image();
             img.onload = function() {
-                var ratio = Math.min(canvas.width / img.width, canvas.height / img.height);
-
-                canvas.width = img.width * ratio;
-                canvas.height = img.height * ratio;
-                ctx.drawImage(img, 
-                              0, 0, img.width,    img.height ,     
-                              0, 0, canvas.width, canvas.height);
+                drawImage();
                 drawText();
             }
             img.src = reader.result;
@@ -58,7 +52,7 @@ initializeText = function() {
 
     topOffset = document.getElementById("topOffset");
     topOffset.addEventListener("input", drawText);
-    topOffset.value = -10;
+    topOffset.value = 0;
 
     bottomOffset = document.getElementById("bottomOffset");
     bottomOffset.addEventListener("input", drawText);
@@ -73,16 +67,26 @@ initializeDownload = function() {
         downloadLink.target = "_blank";
     });
 }
+drawImage = function() {
+    if (img) {
+        var ratio = Math.min(canvas.width / img.width, canvas.height / img.height);
 
+        canvas.width = img.width * ratio;
+        canvas.height = img.height * ratio;
+        ctx.drawImage(img, 
+                    0, 0, img.width,    img.height ,     
+                    0, 0, canvas.width, canvas.height);
+    }
+}
 drawText = function() {
     clearCanvas();
-
+    drawImage();
     size = topSize.value ? topSize.value : "30";
     setStyle(topSize);
     var text = topText.value;
     text = text.toUpperCase();
     var topLines = getLines(text);
-    var topY = topOffset.value ? +(topOffset.value) : 10;
+    var topY = topOffset.value ? + (topOffset.value) : 10 + topSize.value;
     for (i = 0; i < topLines.length; i++) {
         ctx.beginPath();
         ycoord =  (canvas.height / 10) + (size * 1.2 * i) + topY;
@@ -170,4 +174,5 @@ window.onload = function() {
 
 window.onresize = function() {
     initializeCanvas();
+    drawText();
 }
