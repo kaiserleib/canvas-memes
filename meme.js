@@ -16,6 +16,7 @@ initializeCanvas = function() {
 initializeImage = function() {
     img = new Image();
     img.onload = function() {
+        initializeCanvas();
         var ratio = Math.min(canvas.width / img.width, canvas.height / img.height);
         canvas.width = img.width * ratio;
         canvas.height = img.height * ratio;
