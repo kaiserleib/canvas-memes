@@ -1,10 +1,15 @@
 var canvas, ctx, chooser, fileUpload, img, topText, bottomText, topSize, bottomSize, fontFace, downloadLink;
 
+initializeMaterialize = function() {
+    $('select').material_select();
+}
+
 initializeCanvas = function() {
     canvas = document.getElementById("memeCanvas");
-    leftColumn = document.getElementById("left-column");
-    canvas.width = Math.min(800, leftColumn.offsetWidth);
-    canvas.height = Math.min(500, window.innerHeight * 0.8);
+    cardCanvas = document.getElementById("card-canvas");
+    // canvas.width = Math.min(800, cardCanvas.offsetWidth);
+    // canvas.height = Math.min(500, window.innerHeight * 0.8);
+    // $('#canvas').height($('#canvas').width() / 2.031);
 
     ctx = canvas.getContext('2d');
     ctx.beginPath();
@@ -15,22 +20,28 @@ initializeCanvas = function() {
 
 initializeImage = function() {
     img = new Image();
+    img.src = "public/images/placeholder.png"
     img.onload = function() {
         initializeCanvas();
-        var ratio = Math.min(canvas.width / img.width, canvas.height / img.height);
-        canvas.width = img.width * ratio;
-        canvas.height = img.height * ratio;
+        canvas.width = img.width;
+        canvas.height = img.height;
         drawImage();
         drawText();
     }
 }
 
 initializeUploader = function() {
+    fileUploadAnchor = document.getElementById("fileUploadAnchor");
+    fileUploadAnchor.addEventListener("click", function() {
+        $("#fileUpload").click();
+    });
+
     fileUpload = document.getElementById("fileUpload");
     fileUpload.addEventListener("change", function() {
         var reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onloadend = function(e) {
             img.src = reader.result;
+            $("#meme-title").html("Custom Meme");
         }
         reader.readAsDataURL(fileUpload.files[0]);
     });
@@ -76,16 +87,19 @@ initializeDownload = function() {
 }
 
 initializeChooser = function() {
-    chooser = document.getElementById("fileChoose");
-    chooser.addEventListener("change", function() {
-        var imagePath = chooser.value;
-        if (imagePath !== "none") {
-            img.src = "images/" + imagePath;
+    chooser = $("#fileChoose");
+    chooser.on('change', function() {
+        var imagePath = chooser.val();
+        var memeTitle = $("#fileChoose option:selected").text();
+        if (memeTitle == "None") {
+            memeTitle = "Custom Meme";
         }
+        $("#meme-title").html(memeTitle);
+        img.src = "public/images/" + imagePath;
         if (img.complete) {
             drawText();
         }
-    });
+    })
 }
 
 drawImage = function() {
@@ -184,6 +198,7 @@ getLines = function(text) {
 }
 
 window.onload = function() {
+    initializeMaterialize();
     initializeImage();
     initializeCanvas();
     initializeChooser();
