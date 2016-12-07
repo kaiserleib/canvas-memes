@@ -1,111 +1,138 @@
 <html>
     <head>
         <title>Canvas Meme Generator</title>
-        <script src = "meme.js"></script>
-        <link rel = "stylesheet" type = "text/css" href = "style.css"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel = "stylesheet" type = "text/css" href = "public/css/libs/materialize.min.css"/>
+        <link rel = "stylesheet" type = "text/css" href = "public/css/style.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
-        <div id = "header">
-            <h1>HTML5 Canvas Meme Generator</h1>
+        <div class="fixed-action-btn vertical">
+            <a id="fileUploadAnchor" class="btn-floating btn-large blue">
+                <i class="large material-icons">file_upload</i>
+            </a>
         </div>
-        <div id = "left-column">
-            <canvas id = "memeCanvas"></canvas>
+        <input id="fileUpload" type="file" class="hidden" style="display: none"></input>
+
+        <div class="container-fluid">
+            <div id = "header" class="title-header">
+                <h1>HTML5 Meme Generator</h1>
+            </div>
+            <div class="row">
+                <div id="card-column" class="col s10"">
+                    <div id="card-canvas" class="card">
+                        <div class="card-image">
+                            <canvas id="memeCanvas"></canvas>
+                        </div>
+                        <div class="card-title">
+                            <center><h4 id="meme-title">Custom Meme</h4></center>
+                        </div>
+                        <div class="card-action">
+                            <div class="row">
+                                <form class="col s12">
+                                    <div class="row">
+                                        <div class="input-field">
+                                            <select id="fileChoose">
+                                                <option value = "placeholder.png" selected>None</option>
+                                                <option value = "marvin.png">minor mistake marvin</option>
+                                                <option value = "brian.jpg">bad luck brian</option>
+                                                <option value = "eel.jpg">bad joke eel</option>
+                                                <option value = "mallard.png">actual advice mallard</option>
+                                                <option value = "manly.jpg">overly manly man</option>
+                                                <option value = "clarence.jpg">sudden clarity clarence</option>
+                                                <option value = "girlfriend.jpg">overly attached girlfriend</option>
+                                                <option value = "ermahgerd.jpg">ermahgerd</option>
+                                                <option value = "wonka.jpg">condescending wonka</option>
+                                                <option value = "photogenic.jpg">ridiculously photogenic guy</option>
+                                                <option value = "liberal.jpg">college liberal</option>
+                                                <option value = "senior.jpg">lazy college senior</option>
+                                                <option value = "karate.jpg">karate kyle</option>
+                                                <option value = "teacher.png">unhelpful high school teacher</option>
+                                                <option value = "freshman.jpg">college freshman</option>
+                                                <option value = "greg.jpg">good guy greg</option>
+                                                <option value = "rasta.jpg">rasta science teacher</option>
+                                                <option value = "steve.jpg">scumbag steve</option>
+                                                <option value = "drinkmyown.jpg">drink my own</option>
+                                                <option value = "insanity.jpg">insanity wolf</option>
+                                                <option value = "courage.jpg">courage wolf</option>
+                                                <option value = "interesting.jpg">most interesting man in the world</option>
+                                                <option value = "kenobi.jpg">kenobi</option>
+                                                <option value = "pepperidge.jpg">pepperidge farm</option>
+                                                <option value = "picard.jpg">picard</option>
+                                            </select>
+                                            <label>Choose a meme</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <select id = "fontFace">
+                                                <option value = "impact" selected = "selected">Impact</option>
+                                                <option value = "Comic Sans MS">Comic Sans</option>
+                                                <option value = "helvetica neue">Helvetica Neue</option>
+                                                <option value = "papyrus">Papyrus</option>
+                                                <option value = "garamond">Garamond</option>
+                                            </select>
+                                            <label>Font</label>
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <select id = "fontStyle">
+                                                <option value = "outline" selected = "selected">Black Outline White</option>
+                                                <option value = "black">Black</option>
+                                                <option value = "white">White</option>
+                                            </select>
+                                            <label>Style</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <input id = "topText" type = "text"/>
+                                            <label>Top Text</label>
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <input id = "bottomText" type = "text"/>
+                                            <label>Bottom Text</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col s6">
+                                            <label>Top Size</label>
+                                            <p class="range-field">
+                                                <input id = "topSize" type = "range" min = "1" max = "100"/>
+                                            </p>
+                                        </div>
+                                        <div class="col s6">
+                                            <label>Bottom Size</label>
+                                            <p class="range-field">
+                                                <input id = "bottomSize" type = "range" min = "1" max = "100"/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col s6">
+                                            <label>Top Offset</label>
+                                            <p class="range-field">
+                                                <input id = "topOffset" type = "range" min = "-100" max = "500"/>
+                                            </p>
+                                        </div>
+                                        <div class="col s6">
+                                            <label>Bottom Offset</label>
+                                            <p class="range-field">
+                                                <input id = "bottomOffset" type = "range" min = "-100" max = "500"/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row center">
+                                        <a id="downloadLink" href="#"> Download Image (new tab)</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id = "right-column">
-            <form>
-                <div>
-                    <label for = "fileChoose">Choose a meme:</label>
-                    <select id = "fileChoose"/>
-                        <option value = "none" selected = "selected">None</option>
-                        <option value = "marvin.png">minor mistake marvin</option>
-                        <option value = "brian.jpg">bad luck brian</option>
-                        <option value = "eel.jpg">bad joke eel</option>
-                        <option value = "mallard.png">actual advice mallard</option>
-                        <option value = "manly.jpg">overly manly man</option>
-                        <option value = "clarence.jpg">sudden clarity clarence</option>
-                        <option value = "girlfriend.jpg">overly attached girlfriend</option>
-                        <option value = "ermahgerd.jpg">ermahgerd</option>
-                        <option value = "wonka.jpg">condescending wonka</option>
-                        <option value = "photogenic.jpg">ridiculously photogenic guy</option>
-                        <option value = "liberal.jpg">college liberal</option>
-                        <option value = "senior.jpg">lazy college senior</option>
-                        <option value = "karate.jpg">karate kyle</option>
-                        <option value = "teacher.png">unhelpful high school teacher</option>
-                        <option value = "freshman.jpg">college freshman</option>
-                        <option value = "greg.jpg">good guy greg</option>
-                        <option value = "rasta.jpg">rasta science teacher</option>
-                        <option value = "steve.jpg">scumbag steve</option>
-                        <option value = "drinkmyown.jpg">drink my own</option>
-                        <option value = "insanity.jpg">insanity wolf</option>
-                        <option value = "courage.jpg">courage wolf</option>
-                        <option value = "interesting.jpg">most interesting man in the world</option>
-                        <option value = "kenobi.jpg">kenobi</option>
-                        <option value = "pepperidge.jpg">pepperidge farm</option>
-                        <option value = "picard.jpg">picard</option>
-                    </select>
-                    <br/>
-                </div>
-                <div>
-                    <label for = "fileUpload">Or upload:</label>
-                    <input id = "fileUpload" type = "file"/>
-                    <br/>
-                </div>
-                <div>
-                    <label for = "fontFace">Font:</label>
-                    <select id = "fontFace">
-                        <option value = "impact" selected = "selected">Impact</option>
-                        <option value = "Comic Sans MS">Comic Sans</option>
-                        <option value = "helvetica neue">Helvetica Neue</option>
-                        <option value = "papyrus">Papyrus</option>
-                        <option value = "garamond">Garamond</option>
-                    </select>
-                    <br/>
-                </div>
-                <div>
-                <label for = "fontStyle">Style:</label>
-                    <select id = "fontStyle">
-                        <option value = "outline" selected = "selected">Black Outline White</option>
-                        <option value = "black">Black</option>
-                        <option value = "white">White</option>
-                    </select>
-                    <br/>
-                </div>
-                <div>
-                    <label for = "topText">Top Text:</label>
-                    <input id = "topText" type = "text"/>
-                    <br/>
-                </div>
-                <div>
-                    <label for = "topSize">Size:</label>
-                    <input id = "topSize" type = "range" min = "1" max = "100"/>
-                    <br/>
-                </div>
-                <div>
-                    <label for = "topOffset">Offset:</label>
-                    <input id = "topOffset" type = "range" min = "-100" max = "500"/>
-                    <br/>
-                </div>
-                <div>
-                    <label for = "bottomText">Bottom Text:</label>
-                    <input id = "bottomText" type = "text">
-                    <br/>
-                </div>
-                <div>
-                    <label for = "bottomSize">Size:</label>
-                    <input id = "bottomSize" type = "range" min = "1" max = "100"/>
-                    <br/>
-                </div>  
-                <div>
-                    <label for = "bottomOffset">Offset:</label>
-                    <input id = "bottomOffset" type = "range" min = "-100" max = "500"/>
-                    <br/>
-                </div>
-                <div>
-                    <a id = "downloadLink" href="#">View Image (New Tab)</a>
-                    <span class="spacer"/>
-                </div>
-            </form>
-        </div>
+        <script src = "public/js/libs/jquery-3.1.1.min.js"></script>
+        <script src = "public/js/libs/materialize.min.js"></script>
+        <script src = "public/js/meme.js"></script>
     </body>
 </html>
