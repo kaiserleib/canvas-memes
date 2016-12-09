@@ -17,12 +17,16 @@ initializeImage = function() {
     img = new Image();
     img.onload = function() {
         initializeCanvas();
-        var ratio = Math.min(canvas.width / img.width, canvas.height / img.height);
-        canvas.width = img.width * ratio;
-        canvas.height = img.height * ratio;
+        computeRatio();
         drawImage();
         drawText();
     }
+}
+
+computeRatio = function() {
+    var ratio = Math.min(canvas.width / img.width, canvas.height / img.height);
+    canvas.width = img.width * ratio;
+    canvas.height = img.height * ratio;
 }
 
 initializeUploader = function() {
@@ -90,6 +94,7 @@ initializeChooser = function() {
 
 drawImage = function() {
     if (img) {
+        computeRatio();
         ctx.drawImage(img, 
                     0, 0, img.width,    img.height ,     
                     0, 0, canvas.width, canvas.height);
