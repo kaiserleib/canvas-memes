@@ -73,9 +73,10 @@ initializeText = function() {
 initializeDownload = function() {
     downloadLink = document.getElementById("downloadLink");
     downloadLink.addEventListener("click", function() {
-        var data = canvas.toDataURL();
-        downloadLink.href = data;
-        downloadLink.target = "_blank";
+        var data = canvas.toBlob(function(blob) {
+            downloadLink.href = URL.createObjectURL(blob);
+            downloadLink.target = "_blank";
+        });
     });
 }
 
