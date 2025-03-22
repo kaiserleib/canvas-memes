@@ -1,31 +1,88 @@
+body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
 
-body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-label { display: block; float: left; text-align: right; margin-right: 0.1em; width:5em; overflow: hidden; white-space: nowrap; }
+#header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    width: 100%;
+}
+
+form > div {
+    margin-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+label {
+    min-width: 100px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+select, input[type="text"], input[type="file"] {
+    flex: 1;
+    min-width: 200px;
+    max-width: 100%;
+}
+
+input[type="range"] {
+    flex: 1;
+    min-width: 150px;
+}
+
+.spacer {
+    flex: 1;
+}
+
+#downloadLink {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+#downloadLink:hover {
+    background-color: #0056b3;
+}
 
 @media (min-width: 768px) {
-
-label { display: block; float: left; text-align: right; margin-right: 0.3em; width: 10em;}
-a { display: block; float: left; text-align: right; margin-right: 0.3em; width: 16em;}
-select { width: 14em;}
-input { width: 14em;}
-	
-	#left-column {
-		float:left;
-		width:46%;
-		position:relative;
-		overflow:hidden;
-	}
-	#right-column {
-		float:left;
-		width:46%;
-		position:relative;
-		overflow:hidden;
-		padding-left: 1em;
-	}
-	#header {
-		clear: both;
-		width: 100%;
-		display: block;
-		text-align: center;
-	}
+    #left-column {
+        float: left;
+        width: 46%;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    #right-column {
+        float: left;
+        width: 46%;
+        position: relative;
+        overflow: hidden;
+        padding-left: 2em;
+    }
+    
+    form > div {
+        margin-bottom: 20px;
+    }
+    
+    label {
+        min-width: 120px;
+    }
+    
+    select, input[type="text"], input[type="file"] {
+        min-width: 250px;
+    }
 }
