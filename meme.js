@@ -1,4 +1,4 @@
-var canvas, ctx, chooser, fileUpload, img, topText, bottomText, topSize, bottomSize, fontFace, downloadLink;
+var canvas, ctx, chooser, fileUpload, img, topText, bottomText, topSize, bottomSize, fontFace;
 
 initializeCanvas = function() {
     canvas = document.getElementById("memeCanvas");
@@ -68,16 +68,6 @@ initializeText = function() {
     bottomOffset = document.getElementById("bottomOffset");
     bottomOffset.addEventListener("input", drawText);
     bottomOffset.value = -30;
-}
-
-initializeDownload = function() {
-    downloadLink = document.getElementById("downloadLink");
-    downloadLink.addEventListener("click", function() {
-        var data = canvas.toBlob(function(blob) {
-            downloadLink.href = URL.createObjectURL(blob);
-            downloadLink.target = "_blank";
-        });
-    });
 }
 
 initializeChooser = function() {
@@ -194,7 +184,6 @@ window.onload = function() {
     initializeChooser();
     initializeUploader();
     initializeText();
-    initializeDownload();
 }
 
 window.onresize = function() {
