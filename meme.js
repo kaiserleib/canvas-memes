@@ -94,7 +94,6 @@ initializeChooser = function() {
 
 drawImage = function() {
     if (img) {
-        computeRatio();
         ctx.drawImage(img, 
                     0, 0, img.width,    img.height ,     
                     0, 0, canvas.width, canvas.height);
